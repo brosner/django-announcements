@@ -1,6 +1,7 @@
+
 from atom import Feed
 
-from models import NewsItem
+from announcements.models import Announcement
 
 
 class AnnouncementsBase(Feed):
@@ -16,7 +17,7 @@ class AnnouncementsBase(Feed):
     #   def item_links
     
     def items(self):
-        return NewsItem.objects.order_by("-creation_date")[:10]
+        return Announcement.objects.order_by("-creation_date")[:10]
     
     def item_title(self, item):
         return item.title

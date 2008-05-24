@@ -4,6 +4,7 @@ from datetime import datetime
 from django.db import models
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
+from django.utils.translation import ugettext_lazy as _
 
 
 class AnnouncementManager(models.Manager):
@@ -25,12 +26,12 @@ class AnnouncementManager(models.Manager):
 
 class Announcement(models.Model):
 
-    title = models.CharField(max_length=50)
-    content = models.TextField()
-    creator = models.ForeignKey(User)
-    creation_date = models.DateTimeField(default=datetime.now)
-    site_wide = models.BooleanField()
-    members_only = models.BooleanField()
+    title = models.CharField(_("title"), max_length=50)
+    content = models.TextField(_("content"))
+    creator = models.ForeignKey(User, verbose_name=_("creator"))
+    creation_date = models.DateTimeField(_("creation_date"), default=datetime.now)
+    site_wide = models.BooleanField(_("site wide"))
+    members_only = models.BooleanField(_("members only"))
     
     objects = AnnouncementManager()
     
@@ -40,6 +41,10 @@ class Announcement(models.Model):
     
     def __unicode__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = _("announcement")
+        verbose_name_plural = _("announcements")
     
     class Admin:
         list_display = ("title", "creator", "creation_date", "members_only")

@@ -12,7 +12,6 @@ def announcement_list(request):
     if not request.user.is_authenticated():
         queryset = queryset.filter(members_only=False)
     queryset = queryset.order_by("-creation_date")
-    print str(queryset.query)
     return list_detail.object_list(request, **{
         "queryset": queryset,
         "allow_empty": True,

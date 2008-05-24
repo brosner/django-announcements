@@ -4,15 +4,15 @@ from django.contrib.auth.models import User
 
 class NewsItem(models.Model):
 
-    title = models.CharField(maxlength=50)
+    title = models.CharField(max_length=50)
     content = models.TextField()
     creator = models.ForeignKey(User)
     creation_date = models.DateTimeField()
 
     def get_absolute_url(self):
-        return "/announcements/" + str(self.id)
+        return "/announcements/" + str(self.pk)
     
-    def __str__(self):
+    def __unicode__(self):
         return self.title
     
     class Admin:

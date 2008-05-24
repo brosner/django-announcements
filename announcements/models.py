@@ -10,6 +10,7 @@ class Announcement(models.Model):
     content = models.TextField()
     creator = models.ForeignKey(User)
     creation_date = models.DateTimeField()
+    members_only = models.BooleanField()
 
     def get_absolute_url(self):
         return ("announcement_detail", [str(self.pk)])
@@ -19,4 +20,5 @@ class Announcement(models.Model):
         return self.title
     
     class Admin:
-        list_display = ("title", "creator", "creation_date")
+        list_display = ("title", "creator", "creation_date", "members_only")
+        list_filter = ("members_only",)

@@ -7,11 +7,7 @@ from announcements.models import Announcement
 
 
 def announcement_list(request):
-    announcements_hidden = request.session.get("announcements_hidden", set())
-    queryset = Announcement.objects.exclude(pk__in=announcements_hidden)
-    if not request.user.is_authenticated():
-        queryset = queryset.filter(members_only=False)
-    queryset = queryset.order_by("-creation_date")
+    queryset = Announcement.objects.current(request)
     return list_detail.object_list(request, **{
         "queryset": queryset,
         "allow_empty": True,

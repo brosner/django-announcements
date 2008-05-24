@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic import list_detail
 from django.shortcuts import get_object_or_404
 
-from announcements.models import current_announcements_for_request
+from announcements.models import Announcement, current_announcements_for_request
 
 
 def announcement_list(request):

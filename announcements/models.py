@@ -12,7 +12,7 @@ class Announcement(models.Model):
     creation_date = models.DateTimeField()
 
     def get_absolute_url(self):
-        return ("announcment_detail", [str(self.pk)])
+        return ("announcement_detail", [str(self.pk)])
     get_absolute_url = models.permalink(get_absolute_url)
     
     def __unicode__(self):

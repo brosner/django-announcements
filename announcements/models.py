@@ -1,6 +1,7 @@
 
 from django.db import models
 from django.contrib.auth.models import User
+from django.core.urlresolvers import reverse
 
 
 class Announcement(models.Model):
@@ -11,7 +12,8 @@ class Announcement(models.Model):
     creation_date = models.DateTimeField()
 
     def get_absolute_url(self):
-        return "/announcements/" + str(self.pk)
+        return ("announcment_detail", [str(self.pk)])
+    get_absolute_url = models.permalink(get_absolute_url)
     
     def __unicode__(self):
         return self.title

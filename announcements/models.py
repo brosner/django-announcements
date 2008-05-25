@@ -7,7 +7,7 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 try:
-    from notifications import models as notifications
+    from notification import models as notifications
 except ImportError:
     notifications = None
 

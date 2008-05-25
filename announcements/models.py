@@ -7,9 +7,9 @@ from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
 try:
-    from notification import models as notifications
+    from notification import models as notification
 except ImportError:
-    notifications = None
+    notification = None
 
 
 class AnnouncementManager(models.Manager):
@@ -55,11 +55,11 @@ class Announcement(models.Model):
         list_filter = ("members_only",)
     
     def save(self):
-        if notifications:
+        if notification:
             # send a notification to all users on the site that want to get
             # announcement notifications.
             users = User.objects.all()
-            notifications.send(users, "announcement", "%s\n\n%s" % (self.title, self.content), issue_notice=False)
+            notification.send(users, "announcement", "%s\n\n%s" % (self.title, self.content), issue_notice=False)
         super(Announcement, self).save()
 
 def current_announcements_for_request(request, **kwargs):

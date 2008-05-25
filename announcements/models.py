@@ -6,6 +6,11 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
+try:
+    from notifications import models as notifications
+except ImportError:
+    notifications = None
+
 
 class AnnouncementManager(models.Manager):
     def current(self, exclude=[], site_wide=False, for_members=False):
@@ -48,6 +53,14 @@ class Announcement(models.Model):
     class Admin:
         list_display = ("title", "creator", "creation_date", "members_only")
         list_filter = ("members_only",)
+    
+    def save(self):
+        if notifications:
+            # send a notification to all users on the site that want to get
+            # announcement notifications.
+            users = User.object.all()
+            notification.send(users, "announcement", "%s\n\n%s" % (self.title, self.content), issue_notice=False)
+        super(Announcement, self).save()
 
 def current_announcements_for_request(request, **kwargs):
     defaults = {}

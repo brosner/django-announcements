@@ -58,8 +58,8 @@ class Announcement(models.Model):
         if notifications:
             # send a notification to all users on the site that want to get
             # announcement notifications.
-            users = User.object.all()
-            notification.send(users, "announcement", "%s\n\n%s" % (self.title, self.content), issue_notice=False)
+            users = User.objects.all()
+            notifications.send(users, "announcement", "%s\n\n%s" % (self.title, self.content), issue_notice=False)
         super(Announcement, self).save()
 
 def current_announcements_for_request(request, **kwargs):

@@ -2,6 +2,7 @@
 from datetime import datetime
 
 from django.db import models
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
@@ -56,9 +57,10 @@ class Announcement(models.Model):
     
     def save(self):
         if notification:
-            # send a notification to all users on the site that want to get
-            # announcement notifications.
-            users = User.objects.all()
+            if settings.DEBUG:
+                users = Users.objects.filter(is_staff=True)
+            else:
+                users = User.objects.all()
             notification.send(users, "announcement", "%s\n\n%s" % (self.title, self.content), issue_notice=False)
         super(Announcement, self).save()
 

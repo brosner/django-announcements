@@ -58,7 +58,7 @@ class Announcement(models.Model):
     def save(self):
         if notification:
             if settings.DEBUG:
-                users = Users.objects.filter(is_staff=True)
+                users = User.objects.filter(is_staff=True)
             else:
                 users = User.objects.all()
             notification.send(users, "announcement", "%s\n\n%s" % (self.title, self.content), issue_notice=False)

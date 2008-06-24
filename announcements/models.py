@@ -51,10 +51,6 @@ class Announcement(models.Model):
         verbose_name = _("announcement")
         verbose_name_plural = _("announcements")
     
-    class Admin:
-        list_display = ("title", "creator", "creation_date", "members_only")
-        list_filter = ("members_only",)
-    
     def save(self):
         if notification:
             if settings.DEBUG:

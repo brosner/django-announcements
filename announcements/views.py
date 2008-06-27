@@ -7,6 +7,11 @@ from announcements.models import Announcement, current_announcements_for_request
 
 
 def announcement_list(request):
+    """
+    A basic view that wraps ``django.views.list_detail.object_list`` and
+    uses ``current_announcements_for_request`` to get the current
+    announcements.
+    """
     queryset = current_announcements_for_request(request)
     return list_detail.object_list(request, **{
         "queryset": queryset,

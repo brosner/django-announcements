@@ -14,9 +14,23 @@ except ImportError:
 
 
 class AnnouncementManager(models.Manager):
+    """
+    A basic manager for dealing with announcements.
+    """
     def current(self, exclude=[], site_wide=False, for_members=False):
         """
-        Fetches and returns a queryset with the current announcements.
+        Fetches and returns a queryset with the current announcements. This
+        method takes the following parameters:
+        
+        ``exclude``
+            A list of IDs that should be excluded from the queryset.
+        
+        ``site_wide``
+            A boolean flag to filter to just site wide announcments.
+        
+        ``for_members``
+            A boolean flag to allow member only announcements to be returned
+            in addition to any others.
         """
         queryset = self.all()
         if site_wide:
@@ -30,7 +44,9 @@ class AnnouncementManager(models.Manager):
 
 
 class Announcement(models.Model):
-
+    """
+    A single announcment.
+    """
     title = models.CharField(_("title"), max_length=50)
     content = models.TextField(_("content"))
     creator = models.ForeignKey(User, verbose_name=_("creator"))
@@ -56,6 +72,12 @@ class Announcement(models.Model):
         list_filter = ("members_only",)
     
     def save(self):
+        """
+        Saves an announcment to the database. This also sends out the
+        announcement notification if django-notification is available. If
+        DEBUG is turned on only send the announcment to staff members
+        otherwise all users is fair game.
+        """
         if notification:
             if settings.DEBUG:
                 users = User.objects.filter(is_staff=True)
@@ -65,6 +87,16 @@ class Announcement(models.Model):
         super(Announcement, self).save()
 
 def current_announcements_for_request(request, **kwargs):
+    """
+    A helper function to get the current announcements based on some data from
+    the HttpRequest.
+    
+    If request.user is authenticated then allow the member only announcments
+    to be returned.
+    
+    Exclude announcments that have already been viewed by the user based on
+    the ``excluded_announcments`` session variable.
+    """
     defaults = {}
     if request.user.is_authenticated():
         defaults["for_members"] = True

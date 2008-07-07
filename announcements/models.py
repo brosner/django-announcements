@@ -83,7 +83,7 @@ class Announcement(models.Model):
                 users = User.objects.filter(is_staff=True)
             else:
                 users = User.objects.all()
-            notification.send(users, "announcement", "%s\n\n%s" % (self.title, self.content), issue_notice=False)
+            notification.send(users, "announcement", {"announcement": self}, issue_notice=False)
         super(Announcement, self).save()
 
 def current_announcements_for_request(request, **kwargs):

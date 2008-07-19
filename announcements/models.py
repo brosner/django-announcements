@@ -56,9 +56,9 @@ class Announcement(models.Model):
     
     objects = AnnouncementManager()
     
+    @models.permalink
     def get_absolute_url(self):
         return ("announcement_detail", [str(self.pk)])
-    get_absolute_url = models.permalink(get_absolute_url)
     
     def __unicode__(self):
         return self.title
@@ -66,10 +66,6 @@ class Announcement(models.Model):
     class Meta:
         verbose_name = _("announcement")
         verbose_name_plural = _("announcements")
-    
-    class Admin:
-        list_display = ("title", "creator", "creation_date", "members_only")
-        list_filter = ("members_only",)
     
     def save(self):
         """

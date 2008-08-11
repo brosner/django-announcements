@@ -1,4 +1,4 @@
-from django.dispatch import dispatcher
+
 from django.db.models import get_models, signals
 
 try:
@@ -11,6 +11,6 @@ try:
         """
         notification.create_notice_type("announcement", "Announcement", "you have received an announcement")
     
-    dispatcher.connect(create_notice_types, signal=signals.post_syncdb, sender=notification)
+    signals.post_syncdb.connect(create_notice_types, sender=notification)
 except ImportError:
     print "Skipping creation of NoticeTypes as notification app not found"

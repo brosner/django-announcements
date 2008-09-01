@@ -67,7 +67,7 @@ class Announcement(models.Model):
         verbose_name = _("announcement")
         verbose_name_plural = _("announcements")
     
-    def save(self):
+    def save(self, force_insert=False, force_update=False):
         """
         Saves an announcment to the database. This also sends out the
         announcement notification if django-notification is available. If
@@ -80,7 +80,7 @@ class Announcement(models.Model):
             else:
                 users = User.objects.all()
             notification.send(users, "announcement", {"announcement": self}, issue_notice=False)
-        super(Announcement, self).save()
+        super(Announcement, self).save(force_insert, force_update)
 
 def current_announcements_for_request(request, **kwargs):
     """

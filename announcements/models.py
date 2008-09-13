@@ -79,7 +79,7 @@ class Announcement(models.Model):
                 users = User.objects.filter(is_staff=True)
             else:
                 users = User.objects.all()
-            notification.send(users, "announcement", {"announcement": self}, issue_notice=False)
+            notification.send(users, "announcement", {"announcement": self}, on_site=False)
         super(Announcement, self).save(force_insert, force_update)
 
 def current_announcements_for_request(request, **kwargs):

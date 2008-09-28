@@ -7,11 +7,6 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
-try:
-    from notification import models as notification
-except ImportError:
-    notification = None
-
 
 class AnnouncementManager(models.Manager):
     """
@@ -66,21 +61,6 @@ class Announcement(models.Model):
     class Meta:
         verbose_name = _("announcement")
         verbose_name_plural = _("announcements")
-    
-    def save(self, force_insert=False, force_update=False):
-        """
-        Saves an announcment to the database. This also sends out the
-        announcement notification if django-notification is available. If
-        DEBUG is turned on only send the announcment to staff members
-        otherwise all users is fair game.
-        """
-        if notification:
-            if settings.DEBUG:
-                users = User.objects.filter(is_staff=True)
-            else:
-                users = User.objects.all()
-            notification.queue(users, "announcement", {"announcement": self}, on_site=False)
-        super(Announcement, self).save(force_insert, force_update)
 
 def current_announcements_for_request(request, **kwargs):
     """

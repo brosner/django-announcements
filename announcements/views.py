@@ -5,6 +5,11 @@ from django.shortcuts import get_object_or_404
 
 from announcements.models import Announcement, current_announcements_for_request
 
+try:
+    set
+except NameError:
+    from sets import Set as set   # Python 2.3 fallback
+
 
 def announcement_list(request):
     """

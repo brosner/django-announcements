@@ -7,6 +7,11 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext_lazy as _
 
+try:
+    set
+except NameError:
+    from sets import Set as set   # Python 2.3 fallback
+
 
 class AnnouncementManager(models.Manager):
     """
@@ -51,9 +56,9 @@ class Announcement(models.Model):
     
     objects = AnnouncementManager()
     
-    @models.permalink
     def get_absolute_url(self):
         return ("announcement_detail", [str(self.pk)])
+    get_absolute_url = models.permalink(get_absolute_url)
     
     def __unicode__(self):
         return self.title

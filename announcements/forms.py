@@ -31,7 +31,7 @@ class AnnouncementAdminForm(forms.ModelForm):
         if self.cleaned_data["send_now"]:
             if notification:
                 users = User.objects.all()
-                notification.queue(users, "announcement", {
+                notification.send(users, "announcement", {
                     "announcement": announcement,
-                }, on_site=False)
+                }, on_site=False, queue=True)
         return announcement

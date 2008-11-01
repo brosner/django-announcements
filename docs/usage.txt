@@ -20,6 +20,24 @@ which is a simple queryset that has filtered the announcements to give you
 just the right ones. If the user viewing the page is authenticated it will
 additionally pull out announcements that have been marked ``for_members``.
 
+Here is a quick snippet of how this can be used in a template. Typically in
+a base template like ``base.html`` or some sort::
+
+    {% if site_wide_announcements %}
+        <div id="site_wide_announcements">
+            <ul>
+                {% for announcement in site_wide_announcements %}
+                <li>
+                    <a href="{{ announcement.get_absolute_url }}">{{ announcement }}</a> -
+                    <a href="{% url announcement_hide announcement.pk %}?next={{ request.path }}">Hide announcement</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
+    
+The above template sample uses the views discussed a little bit later on.
+
 To give a bit of internals, the ``site_wide_announcements`` context processor
 is simply a wrapper around ``current_announcements_for_request`` which is
 located in ``announcements.models``.

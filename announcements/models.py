@@ -26,7 +26,7 @@ class AnnouncementManager(models.Manager):
             A list of IDs that should be excluded from the queryset.
         
         ``site_wide``
-            A boolean flag to filter to just site wide announcments.
+            A boolean flag to filter to just site wide announcements.
         
         ``for_members``
             A boolean flag to allow member only announcements to be returned
@@ -72,11 +72,11 @@ def current_announcements_for_request(request, **kwargs):
     A helper function to get the current announcements based on some data from
     the HttpRequest.
     
-    If request.user is authenticated then allow the member only announcments
+    If request.user is authenticated then allow the member only announcements
     to be returned.
     
-    Exclude announcments that have already been viewed by the user based on
-    the ``excluded_announcments`` session variable.
+    Exclude announcements that have already been viewed by the user based on
+    the ``excluded_announcements`` session variable.
     """
     defaults = {}
     if request.user.is_authenticated():

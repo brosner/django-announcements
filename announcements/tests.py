@@ -20,7 +20,7 @@ __test__ = {"ANNOUNCEMENT_TESTS": r"""
 >>> Announcement.objects.current(site_wide=True)
 [<Announcement: Down for Maintenance Again And Again>]
 
-# get the announcments that authenticated users can see.
+# get the announcements that authenticated users can see.
 >>> Announcement.objects.current(for_members=True)
 [<Announcement: Expected Down Time>, <Announcement: Members Need to Fill Out New Profile Info>, <Announcement: Down for Maintenance Again And Again>, <Announcement: Down for Maintenance Again>, <Announcement: Down for Maintenance>]
 

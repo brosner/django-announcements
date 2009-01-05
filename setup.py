@@ -3,7 +3,7 @@ from distutils.core import setup
 
 setup(
     name = "django-announcements",
-    version = "0.5dev",
+    version = __import__("announcements").__version__,
     author = "Brian Rosner",
     author_email = "brosner@gmail.com",
     description = "Announcements for your Django powered website.",

@@ -12,8 +12,8 @@ from announcements.models import Announcement
 
 class AnnouncementAdminForm(forms.ModelForm):
     """
-    A custom form for the admin of the Announcment model. Has an extra field
-    called send_now that when checked will send out the announcment allowing
+    A custom form for the admin of the Announcement model. Has an extra field
+    called send_now that when checked will send out the announcement allowing
     the user to decide when that happens.
     """
     send_now = forms.BooleanField(required=False,

@@ -45,7 +45,7 @@ class AnnouncementManager(models.Manager):
 
 class Announcement(models.Model):
     """
-    A single announcment.
+    A single announcement.
     """
     title = models.CharField(_("title"), max_length=50)
     content = models.TextField(_("content"))

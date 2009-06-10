@@ -49,15 +49,15 @@ To store announcements in the database, announcements comes with a model that
 deals with this. It contains these fields:
 
  * ``title`` - The title of the announcement. This is limited to 50 characters.
-   The title is completely optional since some types of annoucements don't
+   The title is completely optional since some types of announcements don't
    really need one.
  * ``content`` - The main content of the announcement.
  * ``creator`` - The user who created the announcement.
  * ``creation_date`` - A ``DateTimeField`` indicating when the announcement
    was created.
- * ``site_wide`` - A boolean value indicating whether the announcment should
+ * ``site_wide`` - A boolean value indicating whether the announcement should
    be site-wide and used in the context processor.
- * ``members_only`` - This will tag an announcemnt as for member eyes only.
+ * ``members_only`` - This will tag an announcement as for member eyes only.
 
 Additional uses
 ===============

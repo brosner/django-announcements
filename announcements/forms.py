@@ -17,7 +17,7 @@ class AnnouncementAdminForm(forms.ModelForm):
     the user to decide when that happens.
     """
     send_now = forms.BooleanField(required=False,
-        help_text=_("Send out this announcement now."))
+        help_text=_("Tick this box to send out this announcement now."))
     
     class Meta:
         model = Announcement

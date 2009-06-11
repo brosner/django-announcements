@@ -9,9 +9,15 @@ class AnnouncementAdmin(admin.ModelAdmin):
     list_filter = ("members_only",)
     form = AnnouncementAdminForm
     fieldsets = [
-            (None, {'fields': ['title', 'content', 'creator', 'creation_date', \
-                               'site_wide', 'members_only' ]}),
+            (None, {'fields': ['title', 'content', 'site_wide', 'members_only' \
+                               ]}),
             ('Manage announcement', {'fields': ['send_now']}),
         ]
+
+    def save_model(self, request, obj, form, change):
+        if not change:
+            # When creating a new announcement, set the creator field.
+            obj.creator = request.user
+        obj.save()
 
 admin.site.register(Announcement, AnnouncementAdmin)

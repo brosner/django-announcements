@@ -48,7 +48,7 @@ class Announcement(models.Model):
     """
     title = models.CharField(_("title"), max_length=50)
     content = models.TextField(_("content"))
-    creator = models.ForeignKey(User, limit_choices_to={"is_staff": True}, verbose_name=_("creator"))
+    creator = models.ForeignKey(User, verbose_name=_("creator"))
     creation_date = models.DateTimeField(_("creation_date"), default=datetime.now)
     site_wide = models.BooleanField(_("site wide"), default=False)
     members_only = models.BooleanField(_("members only"), default=False)

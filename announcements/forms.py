@@ -22,7 +22,7 @@ class AnnouncementAdminForm(forms.ModelForm):
     
     class Meta:
         model = Announcement
-        exclude = ('creator', 'creation_date')
+        exclude = ("creator", "creation_date")
     
     def save(self, commit=True):
         """

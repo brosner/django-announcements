@@ -18,10 +18,11 @@ class AnnouncementAdminForm(forms.ModelForm):
     """
 
     send_now = forms.BooleanField(required=False,
-        help_text=_("Send out this announcement now."))
+        help_text=_("Tick this box to send out this announcement now."))
     
     class Meta:
         model = Announcement
+        exclude = ('creator', 'creation_date')
     
     def save(self, commit=True):
         """

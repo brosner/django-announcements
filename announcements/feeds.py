@@ -1,4 +1,3 @@
-
 from atomformat import Feed
 
 from announcements.models import Announcement

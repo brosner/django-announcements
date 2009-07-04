@@ -1,5 +1,5 @@
-
 from announcements.models import current_announcements_for_request
+
 
 def site_wide_announcements(request):
     """

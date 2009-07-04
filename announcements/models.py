@@ -1,4 +1,3 @@
-
 from datetime import datetime
 
 from django.db import models
@@ -66,6 +65,7 @@ class Announcement(models.Model):
     class Meta:
         verbose_name = _("announcement")
         verbose_name_plural = _("announcements")
+
 
 def current_announcements_for_request(request, **kwargs):
     """

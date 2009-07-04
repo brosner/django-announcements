@@ -1,4 +1,3 @@
-
 from django.http import HttpResponseRedirect
 from django.views.generic import list_detail
 from django.shortcuts import get_object_or_404
@@ -22,6 +21,7 @@ def announcement_list(request):
         "queryset": queryset,
         "allow_empty": True,
     })
+
 
 def announcement_hide(request, object_id):
     """

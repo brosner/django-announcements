@@ -1,5 +1,5 @@
-
 from django.db.models import get_models, signals
+
 
 try:
     from notification import models as notification

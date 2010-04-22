@@ -12,6 +12,7 @@ setup(
     url = "http://code.google.com/p/django-announcements",
     packages = [
         "announcements",
+        "announcements.templatetags",
     ],
     classifiers = [
         "Development Status :: 3 - Alpha",
